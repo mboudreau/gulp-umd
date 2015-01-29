@@ -43,10 +43,18 @@ function buildFileTemplateData(file, options) {
         param: dep
       };
     }
-    amd.push('\'' + (dep.amd || dep.name) + '\'');
-    cjs.push('require(\'' + (dep.cjs || dep.name) + '\')');
-    global.push('root.' + (dep.global || dep.name));
-    param.push(dep.param || dep.name);
+    if(dep.amd !== null) {
+        amd.push('\'' + (dep.amd || dep.name) + '\'');
+    }
+    if(dep.cjs !== null) {
+      cjs.push('require(\'' + (dep.cjs || dep.name) + '\')');
+    }
+    if(dep.global !== null) {
+      global.push('root.' + (dep.global || dep.name));
+    }
+    if(dep.param !== null) {
+      param.push(dep.param || dep.name);
+    }
   });
 
   return {
